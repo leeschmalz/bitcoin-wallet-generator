@@ -12,4 +12,4 @@ python generate.py
 
 
 #### Disclaimer
-This wallet generator is for educational and testing purposes only. For the storage of significant funds, it is recommended to use an open-source hardware wallet that has been extensively vetted by the bitcoin community.
+This wallet generator is for educational and testing purposes only. For storage of significant funds, an open-source hardware wallet that has been extensively vetted by the bitcoin community is recommended.
