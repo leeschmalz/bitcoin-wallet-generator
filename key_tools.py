@@ -1,8 +1,7 @@
-from mnemonic import Mnemonic
-from bip32 import BIP32
 import hashlib
 import base58
-from datetime import datetime
+from bip32 import BIP32
+from mnemonic import Mnemonic
 
 def privkey_to_wif_compressed(privkey_hex):
     extended_key = "80" + privkey_hex + "01"
@@ -28,7 +27,7 @@ def pubkey_to_address(pubkey_hex):
 
     return address
 
-def generate_keys(mnemonic_phrase, ind):
+def generate_keys_from_mnemonic(mnemonic_phrase, ind):
     seed = Mnemonic.to_seed(mnemonic_phrase)
     bip32 = BIP32.from_seed(seed)
     path = f"m/44'/0'/0'/0/{ind}"
@@ -39,37 +38,3 @@ def generate_keys(mnemonic_phrase, ind):
     address = pubkey_to_address(pubkey_hex)
 
     return privkey_hex, wif_compressed, pubkey_hex, address
-
-
-mnemonic_phrase = input("enter mnemonic (leave blank to generate new):")
-if len(mnemonic_phrase.split(' '))!=24 and mnemonic_phrase!='':
-    raise ValueError("invalid mnemonic")
-
-if mnemonic_phrase=='':
-    mnemo = Mnemonic("english")
-    mnemonic_phrase = mnemo.generate(strength=256)
-
-print(mnemonic_phrase)
-print('\n')
-addresses = []
-for ind in range(20):
-    privkey, wif, pubkey, addr = generate_keys(mnemonic_phrase, ind)
-    addresses.append(addr)
-    print("Priv:", privkey)
-    print("WIF :", wif)
-    print("Pub :", pubkey)
-    print("Addr:", addr)
-    print("\n")
-
-write = input('write public wallet addresses to file?')
-
-current_time = str(datetime.now()).replace('/','-')
-filename = f'wallet_addresses_{current_time}.txt'
-
-if write.lower()=='y':
-    with open(filename, 'w') as file:
-        for address in addresses:
-            file.write(address + '\n')
-            
-    print(f'\naddresses written to: {filename}\n')
-    print('WARNING: secrets are not saved. ensure mnemonic is copied before sending funds.\n')
