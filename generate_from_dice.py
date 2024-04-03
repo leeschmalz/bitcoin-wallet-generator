@@ -24,6 +24,7 @@ bytes = hashlib.sha256(dice_rolls.encode()).digest()
 
 with open("./wordlist.txt", "r", encoding="utf-8") as f:
     wordlist = [w.strip() for w in f.readlines()]
+    assert len(wordlist)==2048
 
 if len(bytes) != 32: raise ValueError("Expected 32 bytes.")
 h = hashlib.sha256(bytes).hexdigest()
