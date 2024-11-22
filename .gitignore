@@ -1,2 +1,4 @@
 venv
 wallet_address*
+env-bitcoin-wallet-generator
+__pycache__

@@ -1,5 +1,11 @@
 import hashlib
 from key_tools import mnemonic_to_output
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--p2pkh", action="store_true")
+args = parser.parse_args()
+address_type = 'p2pkh' if args.p2pkh else 'segwit'
 
 # test should result in 
 # example1: "resource timber firm banner horror pupil frozen main pear direct pioneer broken grid core insane begin sister pony end debate task silk empty curious"
@@ -36,4 +42,4 @@ b = (
 mnemonic_phrase = [ wordlist[int(b[i * 11 : (i + 1) * 11], 2)] for i in  range(len(b) // 11)]
 mnemonic_phrase = ' '.join(mnemonic_phrase)
 
-mnemonic_to_output(mnemonic_phrase)
+mnemonic_to_output(mnemonic_phrase, address_type=address_type)
