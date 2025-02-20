@@ -15,4 +15,4 @@ python generate_from_dice.py
 
 
 #### Disclaimer
-This wallet generator is for educational and testing purposes only. For storage of significant funds, an open-source hardware wallet that has been extensively vetted by the bitcoin community is recommended.
+For storage of significant funds, you should use an open-source hardware wallet that has been extensively vetted by the bitcoin community.
